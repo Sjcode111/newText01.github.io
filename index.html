@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .background{
+            width: 100%;
+            height: 100vh;
+            background-image: url(./images/中秋.png);
+            background-size: cover;
+            background-position: center;
+            /* background-attachment: fixed; */
+            opacity: 0;
+            animation: fadeInBackground 2s ease-in-out forwards; /* 应用动画 */
+            z-index: -2;
+        }
+        @keyframes fadeInBackground {
+            from { opacity: 0; }
+            to { opacity: 1; } /* 结束时背景图片完全不透明 */
+        }
+        img{
+            display: block;
+        }
+        .title{
+            position: absolute;
+            top: 32%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            width:70%;
+            height: 20%;
+        }
+        .sub-title1{
+            width:60%;
+            margin: auto;
+            opacity: 0;
+            animation: fadeInBackground 2s ease-in-out 2s forwards; 
+        }
+        .sub-title2{
+            height: 20%;
+            margin: 5%;
+            float: left;
+            margin-left: 40%;
+            opacity: 0;
+            animation: fadeInBackground 2s ease-in-out 3s forwards; 
+        }
+        .sub-title3{
+            height: 30%;
+            margin: 5%;
+            opacity: 0;
+            animation: fadeInBackground 2s ease-in-out 4s forwards; 
+        }
+        .title2{
+            color: white;
+            margin: auto;
+            width: 90%;
+            height: 90%;
+            border: 1px solid white;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            background-color:rgba(0, 0, 0, 0.565);
+        }
+        .title2 p{
+            text-indent:2em;
+            text-align: justify;
+            /* 两端对齐 */
+        }
+        .title2 h1,h4{
+            text-align: center;
+            font-family: myfont;
+            font-weight: lighter;
+        }
+        h1{
+            font-size: 60px;
+            margin-top: 80px;
+            color: bisque;
+        }
+        .background2{
+            width: 100%;
+            height: 100vh;
+            background-image: url(./images/中秋2.png);
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            display:flex;
+        }
+        #animateElement {
+            opacity: 0; /* 初始不透明度为0 */
+            transition: opacity 2s ease-in-out; /* 淡入淡出过渡效果 */
+        }
+        @font-face {
+            font-family: myfont;
+            src: url(../day6/font/汉仪行楷简.ttf);
+        }
+        .down{
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            width: 30px;
+            opacity: 0;
+            animation: fadeInBackground 0.5s ease-in-out 5s forwards; 
+        }
+        .music-control {
+            position: fixed;
+            top: 2%;
+            right: 2%;
+            cursor: pointer;
+            z-index: 2;
+        }
+        #music{
+            width: 30px;
+            height: 30px;
+        }
+        .playing .music-control img{
+            animation: spin 5s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="music-control">
+        <img src="./images/音乐.svg" alt="" id="music">
+    </div>
+    <audio id="myAudio" src="周深-光亮.mp3" autoplay></audio>
+    <div class="title">
+        <img src="./images/中秋_03.png" alt="" class="sub-title1">
+        <img src="./images/中秋_06.png" alt="" class="sub-title2">
+        <img src="./images/中秋_07.png" alt="" class="sub-title3">
+    </div>
+    <img src="./images/向下翻页2.gif"  class="down">
+    <div class="background"></div>
+    <div class="background2" id="secondPage">
+        <div class="title2" id="animateElement">
+            <h1>中秋快乐</h1>
+            <h4>2024/09/17</h4>
+            <br>
+            <p>当夜幕降临，一轮皓月缓缓升起，银色的光辉洒满了每一寸土地，我们迎来了象征团圆的中秋佳节。在这个特别的日子里，人们无论身处何方，都会停下忙碌的脚步，仰望那轮明月，思念着远方的亲人，祈愿他们平安健康。中秋不仅仅是一个节日，更是一份深深的情怀，承载着我们对家乡的眷恋，对亲人的思念。
+                </p>
+                <br>
+                <p>
+                    此刻，无论是品尝香甜的月饼，还是欣赏美丽的月亮，都寄托了人们对未来的美好期盼。在这个美好的时刻，让我们共同祝愿每一个家庭都能团团圆圆，每一位朋友都能够幸福安康。让这份来自心底的温暖，伴随明月传递给每一个人，让爱和希望照亮前行的道路。中秋佳节之际，愿所有的美好与你相伴！
+                
+                中秋佳节，愿你的生活比这圆月更加圆满，愿你的笑容比这秋夜更加灿烂。祝您及家人中秋快乐，幸福美满！
+                </p>
+        </div>
+    </div>
+    <script>
+        // 监听页面滚动事件
+        window.addEventListener('scroll', function() {
+            const secondPage = document.getElementById('secondPage');
+            // 获取第二页的元素位置
+            const rect = secondPage.getBoundingClientRect();
+            // 判断第二页是否在视口内
+            // 当第二页进入视口时
+            if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+                document.getElementById('animateElement').style.opacity = '1';
+            } else {
+                document.getElementById('animateElement').style.opacity = '0';
+            }
+        });
+    
+        // 监听音频播放状态变化
+        window.onload = function () {
+            const musicControl = document.querySelector('.music-control');
+            const audio = document.getElementById('myAudio');
+            const thirdSubtitle = document.querySelector('.sub-title3'); // 获取第三子标题元素
+    
+            // 将音频初始设置为静音
+            audio.muted = true;
+    
+            // 监听音频的播放状态变化
+            audio.addEventListener('play', () => {
+                document.body.classList.add('playing');
+                // 播放后取消静音
+                audio.muted = false;
+            });
+    
+            audio.addEventListener('pause', () => {
+                document.body.classList.remove('playing');
+            });
+    
+            // 设置点击事件以控制音频的播放/暂停
+            musicControl.addEventListener('click', () => {
+                if (audio.paused || audio.ended) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+            });
+    
+            // 监听第三子标题的动画结束事件
+            thirdSubtitle.addEventListener('animationend', (event) => {
+                // 检查动画名称，确保只有当正确的动画结束时才触发音乐播放
+                if (event.animationName === 'fadeInBackground') {
+                    // 在动画结束后尝试播放音频，此时保持静音状态
+                    audio.play().catch((error) => {
+                        console.error('Failed to play audio:', error);
+                    });
+                }
+            });
+        };
+    </script>
+</body>
+</html>
